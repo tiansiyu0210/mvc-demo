@@ -1,6 +1,7 @@
 package spring.web.mvc.demo.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Recipe {
@@ -18,6 +19,9 @@ public class Recipe {
     private String directions;
     //todo
     //private Difficulty diff
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")//from recipe to Ingredient
+    private Set<Ingredient> ingredientSet;
 
     @Lob
     private Byte[] image;
@@ -103,5 +107,13 @@ public class Recipe {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+    }
+
+    public Set<Ingredient> getIngredientSet() {
+        return ingredientSet;
+    }
+
+    public void setIngredientSet(Set<Ingredient> ingredientSet) {
+        this.ingredientSet = ingredientSet;
     }
 }
